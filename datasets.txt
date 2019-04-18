@@ -1,0 +1,7 @@
+http://www.countyhealthrankings.org/sites/default/files/2017CHR_CSV_Analytic_Data.csv
+http://www.countyhealthrankings.org/sites/default/files/analytic_data2010.csv
+https://www.ers.usda.gov/webdocs/DataFiles/48747/PopulationEstimates.csv?v=4934.5
+https://www.ers.usda.gov/webdocs/DataFiles/48747/Unemployment.csv?v=9329.4
+https://www.ers.usda.gov/webdocs/DataFiles/48747/PovertyEstimates.csv?v=9744.1
+http://www.countyhealthrankings.org/sites/default/files/2010%20County%20Health%20Rankings%20National%20Data_v2.xls
+http://www.countyhealthrankings.org/sites/default/files/2017CountyHealthRankingsData.xls
