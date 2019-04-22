@@ -70,7 +70,7 @@ class Query():
 		if i.lower() == 's':
 			return
 		if i.lower() != 'n':
-			print("-------------------------------------------ABOUT THE DATA-------------------------------------------")
+			print("\n-------------------------------------------ABOUT THE DATA-------------------------------------------")
 			print("This program allows a user to interact with two datasets:\n")
 			print("1. CHR (County Health Rankings) Data")
 			print("\tPublished by the University of Wisconsin Population Health Institute and the Robert Wood")
@@ -111,9 +111,9 @@ class Query():
 			print("Using the intersection of the FIPS codes between both sets of data, we were able to")
 			print("compare the demographics of a region along with its health values.\n")
 
-		i = input("Would you like to read about the schema used? (n for no) ")
+		i = input("\nWould you like to read about the schema used? (n for no) ")
 		if i.lower() != 'n':
-			print("------------------------------------------ABOUT THE SCHEMA------------------------------------------")
+			print("\n------------------------------------------ABOUT THE SCHEMA------------------------------------------")
 			print("In all, 10 relations were used to store the data.  FIPS codes intersected each data set and were")
 			print("thus used as keys between each data set.  Each relation stored two tuples for each FIPS as data")
 			print("from 2010 and 2017 were stored in each table, identified by the year attribute:")
@@ -128,35 +128,68 @@ class Query():
 			print("\t9. subrankings - A county's rank within the subrankings that make up the rankings.")
 			print("\t10. subrankingsquartiles - A county's within-state quartile rank for each subranking.\n")
 
-		i = input("Would you like to see a representation of the relations? (n for no) ")
+		i = input("\nWould you like to see a representation of the relations? (n for no) ")
 		if i.lower() != 'n':
-			print("---------------------------------------------THE SCHEMA---------------------------------------------")
+			print("\n---------------------------------------------THE SCHEMA---------------------------------------------")
 			print(pandas.DataFrame(SCHEMA_1, columns=["index","education","unemployment","population","poverty"]))
 			print()
 			print(pandas.DataFrame(SCHEMA_2, columns=["health", "healthquartile", "rankings", "subrankings", "subrankingsquartiles"]))
 			print()
 			print()
 
-		i = input("Would you like to read about the data loading code? (n for no) ")
+		i = input("\nWould you like to read about the data loading code? (n for no) ")
 		if i.lower() != 'n':
-			print("--------------------------------------------DATA LOADING--------------------------------------------")
+			print("\n--------------------------------------------DATA LOADING--------------------------------------------")
 			print("Loading the data can be done through the code in load_data.py or alternatively by running set_up()")
 			print("in database.py with pandas, csv, and psycopg2 installed.  All csv and xls files from requirements.txt")
 			print("must be downloaded to the same directory, and the code in db_setup.sql must be first run as a psql")
 			print("admin.  From there, load_data.py takes about a minute or so to run.\n")
 
-		i = input("Would you like to read about how we avoided SQL injection vulnerabilities? (n for no) ")
+		i = input("\nWould you like to read about how we avoided SQL injection vulnerabilities? (n for no) ")
 		if i.lower() != 'n':
-			print("--------------------------------------------SQL INJECTION-------------------------------------------")
+			print("\n--------------------------------------------SQL INJECTION-------------------------------------------")
 			print("In order to avoid SQL injection, pyscopg2's execute parameter passing is utilized as much as")
 			print("possible.  In some instances (ie to avoid hardcoding hundreds of query combinations) where this")
 			print("was not viable, queries were formatted using strings passed from application.py to database.py.")
 			print("However, these strings are ALL hardcoded into application.py, such that no user input is ever")
 			print("sent to a query.  Rather ints or single letters are used as input and then if statements will pull")
 			print("corresponding values from arrays of strings.")
-		i = input("Would you like to read a description of each query? (n for no) ")
+		i = input("\nWould you like to read a description of each query? (n for no) ")
 		if i.lower() != 'n':
-			print("--------------------------------------------THE QUERIES--------------------------------------------")
+			print("\n--------------------------------------------THE QUERIES--------------------------------------------")
+			print("Descriptions of each of the queries")
+			print("1.\tChoose any two different counties/FIPS and compare the values of their health or demographic")
+			print("\tattributes from 2010, 2017, and the change of those attributes from 2010 to 2017.  This allows")
+			print("\ta user to compare the values of demographic and health attributes for any two counties.")
+			print("\n2.\tChoose any state and see the within state rankings of each county, coresponding to the")
+			print("\trankings published in the CHR data.  This includes two aggregate rankings: Health Outcomes")
+			print("\tand Health Factors as well as the subrankings that make up these rankings.")
+			print("\n3.\tChoose any state or the entire US and see a heat map of the correlation between attributes")
+			print("\tin the data.  Then select which pairwise correlation demographic vs. demographic, health vs.")
+			print("\thealth, or health vs. demographic.  Note that to improve readability of the charts, the")
+			print("\tabsolute value of the correlation is displayed, so a high correlation may be highly negative.")
+			print("\n4.\tSame structure to 3, however it displays the correlation between the change in attributes")
+			print("\tfrom 2010 to 2017.  For demographic vs. demographic these seems relatively uninteresting,")
+			print("\thowever in health vs. demographic we see some mild correlations.")
+			print("\n5.\tChoose any state or the entire US as well and any attribute, health or demographic.")
+			print("\tThe user then inputs top or bottom as well as an N value, and the top/bottom N FIPS")
+			print("\tover the chosen attribute and location are displayed.  For example, one could see the")
+			print("\t20 counties with the lowest population in Texas.")
+			print("\n6.\tChoose a state and then any two counties within that state.  This then displays the")
+			print("\tcorresponding ranking for each FIPS over each CHR ranking and subranking.  This allows a")
+			print("\tuser to compare two counties within a state head to head.")
+			print("\n7.\tAfter choosing an attribute, this displays a choropleth, or heat map ontop of the US")
+			print("\tmap, with the color of a county corresponding to its value within the attribute.")
+			print("\tUsers can select from demographics, health, health quartiles, rankings, or rankings")
+			print("\tquartiles.  The addition of quartiles makes the ranking data more relevant to the map,")
+			print("\tas it makes it easier to identify patterns having fewer colors.")
+			print("\tThe packages involved in running this command may be a bit finicky; included in the readme")
+			print("\tis a link to a dropbox that hosts 29 relatively interesting outputs from this query, in the")
+			print("\tcase that the user cannot get plotly and/or geopandas to work in their favor.")
+			print("\tplease note that on some machines this command may take a minute to run.")
+			print("\n\n\nFun Fact: We believe that there are approximately 18,841,066 meaningfully different queries")
+			print("that can be run by this program, in other words, 18.8 million different ways to compare this data.")
+
 
 
 	'''
@@ -579,15 +612,12 @@ class Query():
 		print("This might take a second...")
 		if not quart:
 			endpts = list(np.mgrid[min(data.iloc[:][1]):max(data.iloc[:][1]):8j])
-			print('z'+ti2.replace('/',','))
 			fig = ff.create_choropleth(fips=data.iloc[:][0], values=data.iloc[:][1], title = ti,\
 									   legend_title = li, binning_endpoints=endpts)
 		else:
 			fig = ff.create_choropleth(fips=data.iloc[:][0], values=data.iloc[:][1], title = ti,\
 									   legend_title = li)
-		
-		plot(fig, filename= 'z'+ti2.replace('/',','))
-
+		plot(fig, filename= 'z'+ti2.replace('/',' per ').replace('%','percent').replace(' ','_'))
 
 	'''
 	Gets the data for a given demographic for all counties in the US to create a choropleth
@@ -783,7 +813,10 @@ def net_change_rank(data):
 
 
 if __name__ == '__main__':
-	pandas.set_option("display.max_rows", 25)
+	pandas.set_option("display.max_rows", 500)
+	pandas.set_option("display.max_columns", 500)
+	pandas.set_option('display.width', 1000)
+	pandas.set_option('display.expand_frame_repr', False)
 	
 	#Ask if user has run db_setup to create expected database/user
 	setup = input("\n\n\nHave you run the code in db_setup.sql in psql as admin yet? (n for no, else yes) ")
@@ -812,7 +845,7 @@ if __name__ == '__main__':
 		A = database.set_up()
 
 	print("Success! Data exists, beginning application.")
-	
+
 	Q = Query(A)
 
 	while True:
@@ -996,7 +1029,6 @@ if __name__ == '__main__':
 				elif i == 5:
 					Q.color_map_rankings(" quartile")
 		except Exception as e:
-			print(e)
 			print("ERROR: Not enough data or something really bad happened")
 			print("Try another query or q to quit.")
 
