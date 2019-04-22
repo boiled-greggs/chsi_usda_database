@@ -19,7 +19,6 @@ DROP TABLE IF EXISTS subrankings;
 DROP TABLE IF EXISTS subrankingsquartiles;
 
 
-
 CREATE TABLE index
 (
   fips int,

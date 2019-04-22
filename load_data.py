@@ -6,6 +6,7 @@ import pandas as pd
 import math
 
 
+
 class Database():
     """
     Class that holds connection to a database.  Three arguments on initialization are used to log into the database:
@@ -53,6 +54,9 @@ class Database():
                 if l[0] is None:
                     continue
                 self.insert("index", [l[0],l[1],l[2],l[3]])
+        self.conn.cursor().execute("UPDATE index \
+                                           SET state = %s \
+                                           WHERE fips = %s;", ('VT', 50000))
         self.conn.commit()
 
     def unemployment(self, fname):
